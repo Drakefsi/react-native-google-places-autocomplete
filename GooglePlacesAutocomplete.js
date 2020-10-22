@@ -85,7 +85,7 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
 
   const buildRowsFromResults = (results) => {
     let res = [];
-
+    props.setRowData(!!results.length)
     if (results.length === 0 || props.predefinedPlacesAlwaysVisible === true) {
       res = [
         ...props.predefinedPlaces.filter((place) => place?.description.length),
@@ -241,7 +241,7 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
 
           if (responseJSON.status === 'OK') {
             // if (_isMounted === true) {
-            const details = responseJSON.result;
+            const details = props.googleGeocodingAPI ? responseJSON.results[0] : responseJSON.result;
             _disableRowLoaders();
             _onBlur();
 
@@ -279,16 +279,27 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
         }
       };
 
-      request.open(
-        'GET',
-        `${url}/place/details/json?` +
-          Qs.stringify({
-            key: props.query.key,
-            placeid: rowData.place_id,
-            language: props.query.language,
-            ...props.GooglePlacesDetailsQuery,
-          }),
-      );
+      if(props.googleGeocodingAPI) {
+        request.open(
+          'GET',
+          `${url}/geocode/json?` +
+            Qs.stringify({
+              key: props.query.key,
+              place_id: rowData.place_id
+            }),
+        );
+      } else {
+        request.open(
+          'GET',
+          `${url}/place/details/json?` +
+            Qs.stringify({
+              key: props.query.key,
+              placeid: rowData.place_id,
+              language: props.query.language,
+              ...props.GooglePlacesDetailsQuery,
+            }),
+        );
+      }
 
       request.withCredentials = requestShouldUseWithCredentials();
 
@@ -810,6 +821,7 @@ GooglePlacesAutocomplete.propTypes = {
   enableHighAccuracyLocation: PropTypes.bool,
   enablePoweredByContainer: PropTypes.bool,
   fetchDetails: PropTypes.bool,
+  googleGeocodingAPI: PropTypes.bool,
   filterReverseGeocodingByTypes: PropTypes.array,
   GooglePlacesDetailsQuery: PropTypes.object,
   GooglePlacesSearchQuery: PropTypes.object,
@@ -831,6 +843,7 @@ GooglePlacesAutocomplete.propTypes = {
   predefinedPlacesAlwaysVisible: PropTypes.bool,
   preProcess: PropTypes.func,
   query: PropTypes.object,
+  setRowData: PropTypes.func,
   renderDescription: PropTypes.func,
   renderHeaderComponent: PropTypes.func,
   renderLeftButton: PropTypes.func,

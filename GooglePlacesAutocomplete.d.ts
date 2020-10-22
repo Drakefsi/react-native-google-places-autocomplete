@@ -370,6 +370,7 @@ interface GooglePlacesAutocompleteProps {
   enableHighAccuracyLocation?: boolean;
   enablePoweredByContainer?: boolean;
   fetchDetails?: boolean;
+  googleGeocodingAPI: boolean;
   // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
   filterReverseGeocodingByTypes?: PlaceType[];
   // available options for GooglePlacesDetails API : https://developers.google.com/places/web-service/details
@@ -407,6 +408,7 @@ interface GooglePlacesAutocompleteProps {
   renderLeftButton?: () => React.ComponentType<{}>;
   renderRightButton?: () => React.ComponentType<{}>;
   renderRow?: (data: GooglePlaceData) => React.ComponentType<{}>;
+  setRowData: () => boolean;
   // sets the request URL to something other than the google api.  Helpful if you want web support or to use your own api.
   requestUrl?: RequestUrl;
   styles?: Partial<Styles>;
