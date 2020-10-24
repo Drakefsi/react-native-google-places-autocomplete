@@ -387,7 +387,7 @@ interface GooglePlacesAutocompleteProps {
   isRowScrollable?: boolean;
   keyboardShouldPersistTaps?: 'never' | 'always' | 'handled';
   // use the ListEmptyComponent prop when no autocomplete results are found.
-  listEmptyComponent?: React.ComponentType<{}>;
+  listEmptyComponent?: JSX.Element | React.ComponentType<{}>;
   listUnderlayColor?: string;
   listViewDisplayed?: 'auto' | boolean;
   minLength?: number; // minimum length of text to search
@@ -402,20 +402,21 @@ interface GooglePlacesAutocompleteProps {
   predefinedPlaces?: Place[];
   predefinedPlacesAlwaysVisible?: boolean;
   preProcess?: (text: string) => string;
-  query: Query;
+  query: Query | Object;
   renderDescription?: (description: DescriptionRow) => string;
-  renderHeaderComponent?: () => React.ComponentType<{}>;
-  renderLeftButton?: () => React.ComponentType<{}>;
-  renderRightButton?: () => React.ComponentType<{}>;
-  renderRow?: (data: GooglePlaceData) => React.ComponentType<{}>;
   setRowData: () => boolean;
+  renderHeaderComponent?: () => JSX.Element | React.ComponentType<{}>;
+  renderLeftButton?: () => JSX.Element | React.ComponentType<{}>;
+  renderRightButton?: () => JSX.Element | React.ComponentType<{}>;
+  renderRow?: (data: GooglePlaceData) => JSX.Element | React.ComponentType<{}>;
+  
   // sets the request URL to something other than the google api.  Helpful if you want web support or to use your own api.
   requestUrl?: RequestUrl;
-  styles?: Partial<Styles>;
+  styles?: Partial<Styles> | Object;
   suppressDefaultStyles?: boolean;
   textInputHide?: boolean;
   // text input props
-  textInputProps?: TextInputProps;
+  textInputProps?: TextInputProps | Object;
   timeout?: number;
 }
 
