@@ -85,7 +85,6 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
 
   const buildRowsFromResults = (results) => {
     let res = [];
-    props.setRowData(!!results.length)
     if (results.length === 0 || props.predefinedPlacesAlwaysVisible === true) {
       res = [
         ...props.predefinedPlaces.filter((place) => place?.description.length),
@@ -494,6 +493,7 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
                 : responseJSON.predictions;
 
             _results = results;
+            props.setRowData(!!results.length)
             setDataSource(buildRowsFromResults(results));
             // }
           }
