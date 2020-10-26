@@ -736,7 +736,7 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
           ItemSeparatorComponent={_renderSeparator}
           renderItem={({ item }) => _renderRow(item)}
           ListEmptyComponent={
-            stateText.length > props.minLength && props.listEmptyComponent
+            stateText?.length > props.minLength && props.listEmptyComponent
           }
           ListHeaderComponent={
             props.renderHeaderComponent &&
