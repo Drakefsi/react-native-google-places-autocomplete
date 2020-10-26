@@ -122,7 +122,7 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
     }
   };
 
-  const [stateText, setStateText] = useState('');
+  const [stateText, setStateText] = useState(undefined);
   const [dataSource, setDataSource] = useState(buildRowsFromResults([]));
   const [listViewDisplayed, setListViewDisplayed] = useState(
     props.listViewDisplayed === 'auto' ? false : props.listViewDisplayed,
