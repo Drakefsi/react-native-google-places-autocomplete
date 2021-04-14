@@ -404,7 +404,7 @@ interface GooglePlacesAutocompleteProps {
   preProcess?: (text: string) => string;
   query: Query | Object;
   renderDescription?: (description: DescriptionRow) => string;
-  setRowData: () => boolean;
+  setRowData: (results: boolean) => void;
   renderHeaderComponent?: () => JSX.Element | React.ComponentType<{}>;
   renderLeftButton?: () => JSX.Element | React.ComponentType<{}>;
   renderRightButton?: () => JSX.Element | React.ComponentType<{}>;
