@@ -361,6 +361,7 @@ interface RequestUrl {
 
 interface GooglePlacesAutocompleteProps {
   autoFillOnNotFound?: boolean;
+  children: React.ReactNode;
   // Will add a 'Current location' button at the top of the predefined places list
   currentLocation?: boolean;
   currentLocationLabel?: string;
