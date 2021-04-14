@@ -6,6 +6,7 @@ import {
   TextInputProps,
   TextStyle,
   ViewStyle,
+  FlatListProps,
 } from 'react-native';
 
 // @see https://developers.google.com/maps/faq#languagesupport
@@ -359,8 +360,9 @@ interface RequestUrl {
   useOnPlatform: 'web' | 'all';
 }
 
-interface GooglePlacesAutocompleteProps {
+interface GooglePlacesAutocompleteProps extends Partial<FlatListProps<any>> {
   autoFillOnNotFound?: boolean;
+  autoFocus?: boolean;
   children: React.ReactNode;
   // Will add a 'Current location' button at the top of the predefined places list
   currentLocation?: boolean;
